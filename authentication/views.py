@@ -43,14 +43,13 @@ class LoginView(GenericAPIView):
         
         print(ip)
 
-        id=request.user
-        print(id)
+        
         
         password=data.get('password', '')
         
         user=authenticate(request,username=username,password=password)
 
-        print(user.id)
+        
         
 
         if user:
@@ -58,11 +57,13 @@ class LoginView(GenericAPIView):
                 {'username': user.username}, settings.JWT_SECRET_KEY
             )
 
+            id=user.id
+
             
 
             serializer=UserSerializer(user)
 
-            data= {'user': serializer.data, 'token': auth_token,'ip': ip}
+            data= {'user': serializer.data, 'token': auth_token,'ip': ip,'id':id}
 
             return Response(data, status=status.HTTP_200_OK)
 
