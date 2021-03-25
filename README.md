@@ -2,7 +2,7 @@
 
 ### Steps to run the project on localhost
 
-1.) ```git clone https://github.com/SymbolofMoon/django-api-framework.git```
+1.) ```git clone https://github.com/SymbolofMoon/django-api-framework.git```\n
 2.) ```cd django-api-framework```
 3.) ```pip install -r requirments.txt```
 4.) ```python manage.py makemigrations```
