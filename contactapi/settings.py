@@ -31,7 +31,7 @@ SECRET_KEY = 'c1vugni_8qg+j0foo__omy4ae7ww^ghu_crog53s=02)uv@s69'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -71,6 +71,7 @@ REST_FRAMEWORK= {
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -151,7 +152,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+PROJECT_ROOT=os.path.dirname(os.path.abspath(__file__))
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS=(
+    os.path.join(PROJECT_ROOT, 'static'),
+)
+
+STATIC_ROOT=os.path.join(BASE_DIR, 'staticfiles')
+
 
 
