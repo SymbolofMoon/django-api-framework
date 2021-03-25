@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'authentication',
     # 'contact',
-    'drf_yasg',
+    
   
     'corsheaders'
 ]
