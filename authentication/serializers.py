@@ -2,6 +2,10 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 
 
+
+#Serializer class it is used for translating django models into useful other formats like here is json
+
+#Userserializer for registration
 class UserSerializer(serializers.ModelSerializer):
     password=serializers.CharField(max_length=65, min_length=6, write_only=True)
     email=serializers.EmailField(max_length=255, min_length=4)
@@ -12,7 +16,9 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model=User
-        fields=('username','first_name', 'last_name', 'email','password')
+        fields=('username','first_name', 'last_name', 'email','password') #Creating fields
+
+    #Checking validation if the email is not repeat    
 
     def validate(self,attrs):
 
@@ -23,22 +29,22 @@ class UserSerializer(serializers.ModelSerializer):
 
 
             return super().validate(attrs)
-
+    # Creating succefully 
 
     def create(self, validated_data):
             return User.objects.create_user(**validated_data)
 
 
 
-
+#Login serializer for Login
 class LoginSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
-        max_length=65, min_length=8, write_only=True)
-    username = serializers.CharField(max_length=255, min_length=2)
+        max_length=65, min_length=8, write_only=True)#password field
+    username = serializers.CharField(max_length=255, min_length=2)#username field
 
     class Meta:
         model = User
-        fields = ['username', 'password']
+        fields = ['username', 'password']#creating fields for user
 
 
 

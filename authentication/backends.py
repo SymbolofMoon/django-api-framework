@@ -3,7 +3,7 @@ from rest_framework import authentication,exceptions
 from django.conf import settings
 from django.contrib.auth.models import User
 
-
+#backends for the encoding and decoding of jwt authentication
 class JWTAuthentication(authentication.BaseAuthentication):
     
 
