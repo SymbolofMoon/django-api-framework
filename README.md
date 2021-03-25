@@ -11,7 +11,7 @@
 
 You have to get on the URL: 
 ```http://127.0.0.1:8000/api/auth/register/```
-for registeration
+for registration
 
 and ```http://127.0.0.1:8000/api/auth/login/``` for login
 
