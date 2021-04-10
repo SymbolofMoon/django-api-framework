@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from rest_framework.generics import GenericAPIView
-from .serializers import UserSerializer, LoginSerializer
+from rest_framework.generics import GenericAPIView,ListCreateAPIView,RetrieveAPIView
+from .serializers import UserSerializer, LoginSerializer, ProfileSerializer
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, permissions
 from django.conf import settings
 from django.contrib.auth import authenticate
+from .models import Profile
 import jwt
 import requests
 import json
@@ -84,6 +85,45 @@ class LoginView(GenericAPIView):
             return Response(data, status=status.HTTP_200_OK) #if success returns  status 200 else 
 
         return Response({'detail': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)    #if fail it returns invalid creds
+
+
+
+
+class ProfileListView(ListCreateAPIView):
+
+    serializer_class=ProfileSerializer
+    permission_classes=[permissions.IsAuthenticated,]
+    
+
+    
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+    def get_queryset(self):
+        return Profile.objects.filter(user=self.request.user)   
+
+
+
+
+
+class ProfileDetailView(RetrieveAPIView):
+
+    serializer_class=ProfileSerializer
+
+    permission_classes=[permissions.IsAuthenticated,]
+
+
+    lookup_field="id"
+
+    def get_queryset(self):
+        return Profile.objects.filter(user=self.request.user)   
+
+   
+
+
+
 
 
 
